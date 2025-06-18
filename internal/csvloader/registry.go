@@ -2,7 +2,10 @@ package csvloader
 
 import (
 	"ce/internal/csvloader/crypto"
+	"path/filepath"
 )
+
+
 
 type CSVDrivers struct {
 	crypto crypto.Interface
@@ -21,7 +24,7 @@ func InitAllDrivers() (*CSVDrivers, error) {
 
 	processors := []CSVProcessor{
 		WrapProcessor(NewProcessor[crypto.CryptoRate](
-			"data/crypto.csv",
+			filepath.Join(dataDir, crypto.CsvFileName),
 			cryptoDriver,
 			crypto.ParseCryptoRate,
 		)),
